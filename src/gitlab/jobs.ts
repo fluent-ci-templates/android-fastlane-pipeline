@@ -1,7 +1,7 @@
 import {
   Environment,
   Job,
-} from "https://deno.land/x/fluent_gitlab_ci@v0.3.1/mod.ts";
+} from "https://deno.land/x/fluent_gitlab_ci@v0.3.2/mod.ts";
 
 export const updateContainerJob = new Job()
   .image("docker:stable")
