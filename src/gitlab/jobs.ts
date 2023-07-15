@@ -24,7 +24,7 @@ export const ensureContainer = new Job()
     `
     mkdir -p ~/.docker && echo '{"experimental": "enabled"}' > ~/.docker/config.json
     docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-  `
+  `,
   )
   .beforeScript(
     `
@@ -32,7 +32,7 @@ if docker manifest inspect $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG > /dev/null; t
   echo 'Skipping job since there is already an image with this tag'
   exit 0
 fi`,
-    { multiline: true }
+    { multiline: true },
   );
 
 export const buildJob = new Job()
@@ -43,7 +43,7 @@ export const buildJob = new Job()
   echo \"$signing_jks_file_hex\" | xxd -r -p - > android-signing-keystore.jks
   export VERSION_CODE="$CI_PIPELINE_IID" && echo \"$VERSION_CODE\"
   export VERSION_SHA=\"\${CI_COMMIT_SHA:0:8}\" && echo \"$VERSION_SHA\"
-  `
+  `,
   )
   .afterScript("rm -f android-signing-keystore.jks || true")
   .artifacts({ paths: ["app/build/outputs"] });
@@ -69,7 +69,7 @@ export const publishInternal = new Job()
   .dependencies(["buildRelease"])
   .when("manual")
   .beforeScript(
-    "echo $google_play_service_account_api_key_json > ~/google_play_api_key.json"
+    "echo $google_play_service_account_api_key_json > ~/google_play_api_key.json",
   )
   .afterScript("rm ~/google_play_api_key.json")
   .script("bundle exec fastlane internal");
@@ -79,7 +79,7 @@ export const promoteJob = new Job()
   .when("manual")
   .dependencies([])
   .beforeScript(
-    "echo $google_play_service_account_api_key_json > ~/google_play_api_key.json"
+    "echo $google_play_service_account_api_key_json > ~/google_play_api_key.json",
   )
   .afterScript("rm ~/google_play_api_key.json");
 

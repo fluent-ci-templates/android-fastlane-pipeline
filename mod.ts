@@ -1,4 +1,4 @@
 import * as Gitlab from "./src/gitlab/index.ts";
 import * as Dagger from "./src/dagger/index.ts";
 
-export { Gitlab, Dagger };
+export { Dagger, Gitlab };
