@@ -4,8 +4,7 @@ A ready-to-use Fastlane pipeline and jobs for Android (React Native) projects.
 
 ## 🚀 Usage
 
-This package also provides a ready-to-use pipeline for
-[Dagger](https://dagger.io/), just run the following command on your Android (React Native)
+Run the following command on your Android (React Native)
 project:
 
 ```sh
