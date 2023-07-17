@@ -69,6 +69,7 @@ export const buildDebug = async (client: Client, src = ".") => {
       "sh",
       "-c",
 "eval $(devbox shell --print-env) && \
+      rm -rf android/app/build/generated/assets && \
       bun install && \
       bundle install && \
       bundle exec fastlane android buildDebug",
@@ -143,6 +144,7 @@ export const buildRelease = async (client: Client, src = ".") => {
       "sh",
       "-c",
 "eval $(devbox shell --print-env) && \
+      rm -rf android/app/build/generated/assets && \
       bun install && \
       bundle install && \
       bundle exec fastlane android buildRelease",
@@ -218,6 +220,7 @@ export const testDebug = async (client: Client, src = ".") => {
       "sh",
       "-c",
 "eval $(devbox shell --print-env) && \
+      rm -rf android/app/build/generated/assets && \
       bun install && \
       bundle install && \
       bundle exec fastlane android testDebug",
