@@ -144,6 +144,7 @@ export const buildRelease = async (client: Client, src = ".") => {
       "-c",
 "eval $(devbox shell --print-env) && \
       bun install && \
+      bundle install && \
       bundle exec fastlane android buildRelease",
     ]);
 
