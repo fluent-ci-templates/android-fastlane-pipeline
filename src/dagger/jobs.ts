@@ -36,7 +36,6 @@ export const buildDebug = async (client: Client, src = ".") => {
     .withMountedCache("/root/.gradle", client.cacheVolume("gradle-cache"))
     .withMountedCache("/app/android/app/build", client.cacheVolume("build"))
     .withMountedCache("/app/vendor", client.cacheVolume("vendor"))
-    .withMountedCache("/app/node_modules", client.cacheVolume("node_modules"))
     .withMountedCache(
       "/root/android-sdk/platforms",
       client.cacheVolume("sdk-platforms"),
@@ -69,7 +68,6 @@ export const buildDebug = async (client: Client, src = ".") => {
       "sh",
       "-c",
 "eval $(devbox shell --print-env) && \
-      rm -rf android/app/build/generated/assets && \
       bun install && \
       bundle install && \
       bundle exec fastlane android buildDebug",
@@ -108,10 +106,10 @@ export const buildRelease = async (client: Client, src = ".") => {
   const ctr = baseCtr
     .withMountedCache("/nix", client.cacheVolume("nix"))
     .withMountedCache("/app/android/.gradle", client.cacheVolume("gradle"))
-    .withMountedCache("/root/.gradle", client.cacheVolume("gradle-cache"))
     .withMountedCache("/app/android/app/build", client.cacheVolume("build"))
-    .withMountedCache("/app/vendor", client.cacheVolume("vendor"))
+    .withMountedCache("/root/.gradle", client.cacheVolume("gradle-cache"))
     .withMountedCache("/app/node_modules", client.cacheVolume("node_modules"))
+    .withMountedCache("/app/vendor", client.cacheVolume("vendor"))
     .withMountedCache(
       "/root/android-sdk/platforms",
       client.cacheVolume("sdk-platforms"),
@@ -140,13 +138,12 @@ export const buildRelease = async (client: Client, src = ".") => {
     .withExec(["sh", "-c", "yes | sdkmanager --licenses"])
     .withEnvVariable("LC_ALL", "en_US.UTF-8")
     .withEnvVariable("LANG", "en_US.UTF-8")
+    .withEnvVariable("NODE_OPTIONS", "--max-old-space-size=4096")
     .withExec([
       "sh",
       "-c",
 "eval $(devbox shell --print-env) && \
-      rm -rf android/app/build/generated/assets && \
       bun install && \
-      bundle install && \
       bundle exec fastlane android buildRelease",
     ]);
 
@@ -184,8 +181,8 @@ export const testDebug = async (client: Client, src = ".") => {
   const ctr = baseCtr
     .withMountedCache("/nix", client.cacheVolume("nix"))
     .withMountedCache("/app/android/.gradle", client.cacheVolume("gradle"))
-    .withMountedCache("/root/.gradle", client.cacheVolume("gradle-cache"))
     .withMountedCache("/app/android/app/build", client.cacheVolume("build"))
+    .withMountedCache("/root/.gradle", client.cacheVolume("gradle-cache"))
     .withMountedCache("/app/vendor", client.cacheVolume("vendor"))
     .withMountedCache("/app/node_modules", client.cacheVolume("node_modules"))
     .withMountedCache(
@@ -220,7 +217,6 @@ export const testDebug = async (client: Client, src = ".") => {
       "sh",
       "-c",
 "eval $(devbox shell --print-env) && \
-      rm -rf android/app/build/generated/assets && \
       bun install && \
       bundle install && \
       bundle exec fastlane android testDebug",
@@ -260,8 +256,8 @@ export const publishInternal = async (client: Client, src = ".") => {
   const ctr = baseCtr
     .withMountedCache("/nix", client.cacheVolume("nix"))
     .withMountedCache("/app/android/.gradle", client.cacheVolume("gradle"))
-    .withMountedCache("/root/.gradle", client.cacheVolume("gradle-cache"))
     .withMountedCache("/app/android/app/build", client.cacheVolume("build"))
+    .withMountedCache("/root/.gradle", client.cacheVolume("gradle-cache"))
     .withMountedCache("/app/vendor", client.cacheVolume("vendor"))
     .withMountedCache("/app/node_modules", client.cacheVolume("node_modules"))
     .withMountedCache(
@@ -335,8 +331,8 @@ export const promoteAlpha = async (client: Client, src = ".") => {
   const ctr = baseCtr
     .withMountedCache("/nix", client.cacheVolume("nix"))
     .withMountedCache("/app/android/.gradle", client.cacheVolume("gradle"))
-    .withMountedCache("/root/.gradle", client.cacheVolume("gradle-cache"))
     .withMountedCache("/app/android/app/build", client.cacheVolume("build"))
+    .withMountedCache("/root/.gradle", client.cacheVolume("gradle-cache"))
     .withMountedCache("/app/vendor", client.cacheVolume("vendor"))
     .withMountedCache("/app/node_modules", client.cacheVolume("node_modules"))
     .withMountedCache(
@@ -410,8 +406,8 @@ export const promoteBeta = async (client: Client, src = ".") => {
   const ctr = baseCtr
     .withMountedCache("/nix", client.cacheVolume("nix"))
     .withMountedCache("/app/android/.gradle", client.cacheVolume("gradle"))
-    .withMountedCache("/root/.gradle", client.cacheVolume("gradle-cache"))
     .withMountedCache("/app/android/app/build", client.cacheVolume("build"))
+    .withMountedCache("/root/.gradle", client.cacheVolume("gradle-cache"))
     .withMountedCache("/app/vendor", client.cacheVolume("vendor"))
     .withMountedCache("/app/node_modules", client.cacheVolume("node_modules"))
     .withDirectory("/app", context, {
@@ -473,8 +469,8 @@ export const promoteProduction = async (client: Client, src = ".") => {
   const ctr = baseCtr
     .withMountedCache("/nix", client.cacheVolume("nix"))
     .withMountedCache("/app/android/.gradle", client.cacheVolume("gradle"))
-    .withMountedCache("/root/.gradle", client.cacheVolume("gradle-cache"))
     .withMountedCache("/app/android/app/build", client.cacheVolume("build"))
+    .withMountedCache("/root/.gradle", client.cacheVolume("gradle-cache"))
     .withMountedCache("/app/vendor", client.cacheVolume("vendor"))
     .withMountedCache("/app/node_modules", client.cacheVolume("node_modules"))
     .withMountedCache(
