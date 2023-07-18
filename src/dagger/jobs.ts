@@ -34,6 +34,7 @@ export const buildDebug = async (client: Client, src = ".") => {
     .withMountedCache("/nix", client.cacheVolume("nix"))
     .withMountedCache("/app/android/.gradle", client.cacheVolume("gradle"))
     .withMountedCache("/root/.gradle", client.cacheVolume("gradle-cache"))
+    .withMountedCache("/app/android/app/build", client.cacheVolume("build"))
     .withMountedCache("/app/vendor", client.cacheVolume("vendor"))
     .withMountedCache(
       "/root/android-sdk/platforms",
@@ -105,6 +106,7 @@ export const buildRelease = async (client: Client, src = ".") => {
   const ctr = baseCtr
     .withMountedCache("/nix", client.cacheVolume("nix"))
     .withMountedCache("/app/android/.gradle", client.cacheVolume("gradle"))
+    .withMountedCache("/app/android/app/build", client.cacheVolume("build"))
     .withMountedCache("/root/.gradle", client.cacheVolume("gradle-cache"))
     .withMountedCache("/app/node_modules", client.cacheVolume("node_modules"))
     .withMountedCache("/app/vendor", client.cacheVolume("vendor"))
@@ -179,8 +181,10 @@ export const testDebug = async (client: Client, src = ".") => {
   const ctr = baseCtr
     .withMountedCache("/nix", client.cacheVolume("nix"))
     .withMountedCache("/app/android/.gradle", client.cacheVolume("gradle"))
+    .withMountedCache("/app/android/app/build", client.cacheVolume("build"))
     .withMountedCache("/root/.gradle", client.cacheVolume("gradle-cache"))
     .withMountedCache("/app/vendor", client.cacheVolume("vendor"))
+    .withMountedCache("/app/node_modules", client.cacheVolume("node_modules"))
     .withMountedCache(
       "/root/android-sdk/platforms",
       client.cacheVolume("sdk-platforms"),
@@ -252,8 +256,10 @@ export const publishInternal = async (client: Client, src = ".") => {
   const ctr = baseCtr
     .withMountedCache("/nix", client.cacheVolume("nix"))
     .withMountedCache("/app/android/.gradle", client.cacheVolume("gradle"))
+    .withMountedCache("/app/android/app/build", client.cacheVolume("build"))
     .withMountedCache("/root/.gradle", client.cacheVolume("gradle-cache"))
     .withMountedCache("/app/vendor", client.cacheVolume("vendor"))
+    .withMountedCache("/app/node_modules", client.cacheVolume("node_modules"))
     .withMountedCache(
       "/root/android-sdk/platforms",
       client.cacheVolume("sdk-platforms"),
@@ -325,8 +331,10 @@ export const promoteAlpha = async (client: Client, src = ".") => {
   const ctr = baseCtr
     .withMountedCache("/nix", client.cacheVolume("nix"))
     .withMountedCache("/app/android/.gradle", client.cacheVolume("gradle"))
+    .withMountedCache("/app/android/app/build", client.cacheVolume("build"))
     .withMountedCache("/root/.gradle", client.cacheVolume("gradle-cache"))
     .withMountedCache("/app/vendor", client.cacheVolume("vendor"))
+    .withMountedCache("/app/node_modules", client.cacheVolume("node_modules"))
     .withMountedCache(
       "/root/android-sdk/platforms",
       client.cacheVolume("sdk-platforms"),
@@ -398,8 +406,10 @@ export const promoteBeta = async (client: Client, src = ".") => {
   const ctr = baseCtr
     .withMountedCache("/nix", client.cacheVolume("nix"))
     .withMountedCache("/app/android/.gradle", client.cacheVolume("gradle"))
+    .withMountedCache("/app/android/app/build", client.cacheVolume("build"))
     .withMountedCache("/root/.gradle", client.cacheVolume("gradle-cache"))
     .withMountedCache("/app/vendor", client.cacheVolume("vendor"))
+    .withMountedCache("/app/node_modules", client.cacheVolume("node_modules"))
     .withDirectory("/app", context, {
       exclude: [
         "node_modules",
@@ -459,8 +469,10 @@ export const promoteProduction = async (client: Client, src = ".") => {
   const ctr = baseCtr
     .withMountedCache("/nix", client.cacheVolume("nix"))
     .withMountedCache("/app/android/.gradle", client.cacheVolume("gradle"))
+    .withMountedCache("/app/android/app/build", client.cacheVolume("build"))
     .withMountedCache("/root/.gradle", client.cacheVolume("gradle-cache"))
     .withMountedCache("/app/vendor", client.cacheVolume("vendor"))
+    .withMountedCache("/app/node_modules", client.cacheVolume("node_modules"))
     .withMountedCache(
       "/root/android-sdk/platforms",
       client.cacheVolume("sdk-platforms"),
