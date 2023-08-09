@@ -18,7 +18,7 @@ dagger run deno run -A https://deno.land/x/android_fastlane_pipeline/ci.ts
 Or, if you want to use the predefined jobs:
 
 ```ts
-import Client, { connect } from "@dagger.io/dagger";
+import { Client, connect } from "https://esm.sh/@dagger.io/dagger@0.8.1";
 import { Dagger } from "https://deno.land/x/android_fastlane_pipeline/mod.ts";
 
 const { buildRelease } = Dagger;
